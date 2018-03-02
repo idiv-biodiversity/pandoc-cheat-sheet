@@ -1,0 +1,58 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="$lang$" xml:lang="$lang$">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+$for(author-meta)$
+  <meta name="author" content="$author-meta$" />
+$endfor$
+$if(date-meta)$
+  <meta name="dcterms.date" content="$date-meta$" />
+$endif$
+$if(keywords)$
+  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
+$endif$
+
+  <style type="text/css">
+    .cheat-sheet {
+      box-sizing: border-box;
+
+      -webkit-column-width: 36em;
+      -moz-column-width: 36em;
+      column-width: 36em;
+
+      -webkit-column-gap: 2em;
+      -moz-column-gap: 2em;
+      column-gap: 2em;
+    }
+
+    h1 {
+      background: linear-gradient(Coral, Bisque);
+    }
+
+    h2 {
+      background-color: Bisque;
+    }
+
+$if(highlighting-css)$
+    $highlighting-css$
+$endif$
+  </style>
+
+  <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="cheat-sheet">
+$body$
+    </div>
+  </div>
+</body>
+</html>

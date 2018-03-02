@@ -1,0 +1,33 @@
+---
+# these are not shown in the document, they are just for metadata
+title: Awesome Topic Cheat Sheet
+author: Jane Doe
+lang: en
+keywords:
+  - awesome
+  - kick-ass
+  - topic
+  - cheat sheet
+
+# highlighting increases readability
+linkcolor: blue
+
+# these LaTeX variables fit as much content on as few pages as possible
+documentclass: scrartcl
+pagestyle: empty
+papersize: a4paper
+geometry:
+  - a4paper
+  - left=1cm
+  - right=1cm
+  - top=1cm
+  - bottom=1cm
+# you can also add "landscape" to geometry if you want more than 2 columns
+
+# fiddle with these to increase readability
+columns: 2
+fontsize: 9pt
+
+# this essentially disables justification, which can increase readability
+ragged: yes
+...
