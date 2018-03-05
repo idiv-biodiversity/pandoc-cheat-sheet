@@ -104,7 +104,7 @@ git stage .gitignore
 make
 
 # done, review the cheat sheets and make a git commit whet you're ready:
-# - firefox topic-cheat-sheet.html
-# - evince topic-cheat-sheet.pdf
+# - xdg-open topic-cheat-sheet.html
+# - xdg-open topic-cheat-sheet.pdf
 # - git commit -m 'initial commit'
 ```
