@@ -98,6 +98,7 @@ git stage topic-cheat-sheet.yml
 # ignore the cheat sheet products
 echo topic-cheat-sheet.html >> .gitignore
 echo topic-cheat-sheet.pdf  >> .gitignore
+echo topic-cheat-sheet.tex  >> .gitignore
 git stage .gitignore
 
 # create the cheat sheets

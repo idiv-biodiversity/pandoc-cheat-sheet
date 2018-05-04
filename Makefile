@@ -6,8 +6,12 @@ SOURCES_MD = $(wildcard *-cheat-sheet.md)
 
 OBJECTS_HTML = $(SOURCES_MD:.md=.html)
 OBJECTS_PDF = $(SOURCES_MD:.md=.pdf)
+OBJECTS_TEX = $(SOURCES_MD:.md=.tex)
 
-OBJECTS = $(OBJECTS_HTML) $(OBJECTS_PDF)
+OBJECTS = \
+	$(OBJECTS_HTML) \
+	$(OBJECTS_PDF) \
+	$(OBJECTS_TEX)
 
 all: $(OBJECTS)
 
