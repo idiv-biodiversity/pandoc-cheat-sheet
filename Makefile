@@ -25,6 +25,7 @@ $(OBJECTS_HTML): $(OBJECTS_DOT_SVG)
 $(OBJECTS_PDF): $(OBJECTS_DOT_SVG)
 
 PANDOC = pandoc
+PANDOC_PDF_ENGINE = xelatex
 
 PANDOC_FLAGS = \
 	--standalone \
@@ -37,7 +38,10 @@ PANDOC_HTML_FLAGS = \
 PANDOC_TEX_FLAGS = \
 	$(PANDOC_FLAGS) \
 	--template=cheat-sheet.tex \
-	--pdf-engine=xelatex
+
+PANDOC_PDF_FLAGS = \
+	$(PANDOC_TEX_FLAGS) \
+	--pdf-engine=$(PANDOC_PDF_ENGINE) \
 
 %.svg: %.dot
 	dot -Tsvg -o $@ $<
@@ -46,7 +50,7 @@ PANDOC_TEX_FLAGS = \
 	$(PANDOC) $(PANDOC_HTML_FLAGS) -o $@ $*.yml $<
 
 %.pdf: %.md %.yml cheat-sheet.tex
-	$(PANDOC) $(PANDOC_TEX_FLAGS) -o $@ $*.yml $<
+	$(PANDOC) $(PANDOC_PDF_FLAGS) -o $@ $*.yml $<
 
 %.tex: %.md %.yml cheat-sheet.tex
 	$(PANDOC) $(PANDOC_TEX_FLAGS) -o $@ $*.yml $<
