@@ -1,4 +1,5 @@
 .PHONY: all clean default print
+.SILENT: print
 
 default: all
 
@@ -10,6 +11,11 @@ OBJECTS_DOT_SVG = $(SOURCES_DOT:.dot=.svg)
 OBJECTS_HTML = $(SOURCES_MD:.md=.html)
 OBJECTS_PDF = $(SOURCES_MD:.md=.pdf)
 OBJECTS_TEX = $(SOURCES_MD:.md=.tex)
+
+META_URL_COLOR = "urlcolor"
+META_LINK_COLOR = "linkcolor"
+META_MONO_COLOR = "monospacecolor"
+PRINT_COLOR = "black"
 
 OBJECTS = \
 	$(OBJECTS_DOT_SVG) \
@@ -44,6 +50,11 @@ PANDOC_PDF_FLAGS = \
 	$(PANDOC_TEX_FLAGS) \
 	--pdf-engine=$(PANDOC_PDF_ENGINE) \
 
+PANDOC_PRINT_FLAGS = \
+    --metadata=$(META_LINK_COLOR):$(PRINT_COLOR) \
+    --metadata=$(META_MONO_COLOR):$(PRINT_COLOR) \
+    --metadata=$(META_URL_COLOR):$(PRINT_COLOR) \
+
 %.svg: %.dot
 	dot -Tsvg -o $@ $<
 
@@ -58,13 +69,9 @@ PANDOC_PDF_FLAGS = \
 
 print:
 	$(foreach file, $(SOURCES_YML), \
-	echo Creating printer friendly pdf for $(patsubst %.yml, %, $(file)); \
-	awk '/linkcolor:/{gsub(/blue/, "black")};/urlcolor:/{gsub(/blue/, "black")};/monospacecolor:/{gsub(/blue/, "black")};{print}' $(file) > $(file)_print ; \
-	$(PANDOC) $(PANDOC_TEX_FLAGS) -o $(patsubst %.yml, %.pdf, $(file)) $(file)_print $(patsubst %.yml, %.md, $(file)); \
+		echo Creating printer friendly pdf for $(patsubst %.yml, %, $(file)); \
+		$(PANDOC) $(PANDOC_TEX_FLAGS) $(PANDOC_PRINT_FLAGS) -o $(patsubst %.yml, %_print.pdf, $(file)) $(file) $(patsubst %.yml, %.md, $(file)); \
 	)\
-	echo Cleaning up ...
-	rm *.yml_print
-
 
 clean:
 	rm -f $(OBJECTS)

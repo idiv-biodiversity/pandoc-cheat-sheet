@@ -68,7 +68,11 @@ You can open this page locally or put in on a web server.
 
 Because these pandoc command-lines are long and cumbersome to write, there is also a very generic `Makefile` contained in this repository. Assuming your input file ends in `-cheat-sheet.md`, e.g. `my-topic-cheat-sheet.md`, then you just need to type `make` to create all cheat sheet variants.
 
-Anytime you change either one of the sources, i.e. your Markdown file, the YAML metadata file or one of the templates, just retype `make` and it will rebuild the files whose sources changed.
+#### Printer friendly version
+
+For cheat sheets with no colored links or monospaced font, it is also possible to create a printer friendly version of a cheat sheet. Just call `make print` and all cheat sheet variants will be created with a `-print.pdf` or `-print.html` filename suffix.
+
+Anytime you change either one of the sources, i.e. your Markdown file, the YAML metadata file or one of the templates, just retype `make` or `make print`, respectively, and it will rebuild the files whose sources changed.
 
 ### git submodule
 
