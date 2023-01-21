@@ -229,9 +229,13 @@ $endif$
 \date{$date$}
 
 \usepackage{multicol}
-
+$if(monospacecolor)$
+\let\oldtexttt\texttt
+\renewcommand{\texttt}[1]{{\color{$monospacecolor$}{\oldtexttt{#1}}}}
+$else$
 \let\oldtexttt\texttt
 \renewcommand{\texttt}[1]{{\color{blue}{\oldtexttt{#1}}}}
+$endif$
 
 $if(sectionbg)$
 \setkomafont{section}{\mysection}

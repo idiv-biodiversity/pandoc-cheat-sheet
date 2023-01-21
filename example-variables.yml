@@ -11,6 +11,8 @@ keywords:
 
 # highlighting increases readability
 linkcolor: blue
+urlcolor: blue
+monospacecolor: blue
 
 # these LaTeX variables fit as much content on as few pages as possible
 documentclass: scrartcl

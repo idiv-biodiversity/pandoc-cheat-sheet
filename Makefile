@@ -1,9 +1,10 @@
-.PHONY: all clean default
+.PHONY: all clean default print
 
 default: all
 
 SOURCES_DOT = $(wildcard *.dot)
 SOURCES_MD = $(wildcard *-cheat-sheet.md)
+SOURCES_YML = $(wildcard *-cheat-sheet.yml)
 
 OBJECTS_DOT_SVG = $(SOURCES_DOT:.dot=.svg)
 OBJECTS_HTML = $(SOURCES_MD:.md=.html)
@@ -54,6 +55,16 @@ PANDOC_PDF_FLAGS = \
 
 %.tex: %.md %.yml cheat-sheet.tex
 	$(PANDOC) $(PANDOC_TEX_FLAGS) -o $@ $*.yml $<
+
+print:
+	$(foreach file, $(SOURCES_YML), \
+	echo Creating printer friendly pdf for $(patsubst %.yml, %, $(file)); \
+	awk '/linkcolor:/{gsub(/blue/, "black")};/urlcolor:/{gsub(/blue/, "black")};/monospacecolor:/{gsub(/blue/, "black")};{print}' $(file) > $(file)_print ; \
+	$(PANDOC) $(PANDOC_TEX_FLAGS) -o $(patsubst %.yml, %.pdf, $(file)) $(file)_print $(patsubst %.yml, %.md, $(file)); \
+	)\
+	echo Cleaning up ...
+	rm *.yml_print
+
 
 clean:
 	rm -f $(OBJECTS)
