@@ -60,7 +60,7 @@ print:
 	$(foreach file, $(SOURCES_YML), \
 	echo Creating printer friendly pdf for $(patsubst %.yml, %, $(file)); \
 	awk '/linkcolor:/{gsub(/blue/, "black")};/urlcolor:/{gsub(/blue/, "black")};/monospacecolor:/{gsub(/blue/, "black")};{print}' $(file) > $(file)_print ; \
-	$(PANDOC) $(PANDOC_TEX_FLAGS) -o $(patsubst %.yml, %.pdf, $(file)) $(file)_print $(patsubst %.yml, %.md, $(file)); \
+	$(PANDOC) $(PANDOC_TEX_FLAGS) -o $(patsubst %.yml, %_print.pdf, $(file)) $(file)_print $(patsubst %.yml, %.md, $(file)); \
 	)\
 	echo Cleaning up ...
 	rm *.yml_print
