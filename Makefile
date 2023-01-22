@@ -1,4 +1,5 @@
 .PHONY: all clean default print
+.SILENT: print
 
 default: all
 
@@ -57,12 +58,15 @@ PANDOC_PDF_FLAGS = \
 	$(PANDOC) $(PANDOC_TEX_FLAGS) -o $@ $*.yml $<
 
 print:
+	# replacing the linkcolor and adding other colors into the yml file,
+	# calling it <file>.yml_print and using it to create the printer friendly file.
 	$(foreach file, $(SOURCES_YML), \
-	echo Creating printer friendly pdf for $(patsubst %.yml, %, $(file)); \
-	awk '/linkcolor:/{gsub(/blue/, "black")};/urlcolor:/{gsub(/blue/, "black")};/monospacecolor:/{gsub(/blue/, "black")};{print}' $(file) > $(file)_print ; \
-	$(PANDOC) $(PANDOC_TEX_FLAGS) -o $(patsubst %.yml, %_print.pdf, $(file)) $(file)_print $(patsubst %.yml, %.md, $(file)); \
+		echo Creating printer friendly pdf for $(patsubst %.yml, %, $(file)); \
+		sed 's/linkcolor: [A-z]*/\nlinkcolor: black\nurlcolor: black\nmonospacecolor: black/' $(file) > $(file)_print ; \
+		$(PANDOC) $(PANDOC_TEX_FLAGS) -o $(patsubst %.yml, %_print.pdf, $(file)) $(file)_print $(patsubst %.yml, %.md, $(file)); \
+		echo File $(patsubst %.yml, %_print.pdf, $(file)) created; \
 	)\
-	echo Cleaning up ...
+	# removing the printer friendly yml file
 	rm *.yml_print
 
 
